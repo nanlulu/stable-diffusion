@@ -15,7 +15,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 def get_device_str():
-    return 'cuda' if torch.cuda.is_available() else 'cpu'
+    return 'mps' if torch.backends.mps.is_available() else 'cuda' if torch.cuda.is_available() else 'cpu'
 
 
 def log_txt_as_img(wh, xc, size=10):
