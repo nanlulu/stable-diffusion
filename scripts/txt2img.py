@@ -157,7 +157,7 @@ def main():
     parser.add_argument(
         "--n_iter",
         type=int,
-        default=2,
+        default=1,
         help="sample this often",
     )
     parser.add_argument(
@@ -187,13 +187,13 @@ def main():
     parser.add_argument(
         "--n_samples",
         type=int,
-        default=3,
+        default=4,
         help="how many samples to produce for each given prompt. A.k.a. batch size",
     )
     parser.add_argument(
         "--n_rows",
         type=int,
-        default=0,
+        default=2,
         help="rows in the grid (default: n_samples)",
     )
     parser.add_argument(
