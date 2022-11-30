@@ -18,6 +18,7 @@ from contextlib import contextmanager, nullcontext
 from ldm.util import instantiate_from_config, get_device_str
 from ldm.models.diffusion.ddim import DDIMSampler
 from ldm.models.diffusion.plms import PLMSSampler
+from ldm.models.diffusion.dpm_solver import DPMSolverSampler
 
 from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
 from transformers import AutoFeatureExtractor
@@ -139,6 +140,11 @@ def main():
         help="use plms sampling",
     )
     parser.add_argument(
+        "--dpm_solver",
+        action='store_true',
+        help="use dpm_solver sampling",
+    )
+    parser.add_argument(
         "--laion400m",
         action='store_true',
         help="uses the LAION400M model",
@@ -249,7 +255,9 @@ def main():
     device = torch.device(get_device_str())
     model = model.to(device)
 
-    if opt.plms:
+    if opt.dpm_solver:
+        sampler = DPMSolverSampler(model)
+    elif opt.plms:
         sampler = PLMSSampler(model)
     else:
         sampler = DDIMSampler(model)
